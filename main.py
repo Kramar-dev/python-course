@@ -1,18 +1,89 @@
+from bs4 import BeautifulSoup
 import requests
-def print_hi(name):
-	# print(f'Hi, {name}')
-	# print('\U0001f621')
-	# str = u'\u005c\u0055\u0030\u0030\u0030\u0031\u0066\u0036\u0032\u0031'
+from winotify import Notification, audio
 
-	#a = requests.get('https://dane.gov.pl/datasets')
-	#print(a.text)
-	# https://www.gov.pl/web/kas/komunikaty
-	
-	#b = bytes.fromhex('68').decode('utf-8')
-	#print(chr(int(f'{a}{b}', 16)))
-	# pseudo kod do programu
-	print()
+URL = "https://www.gov.pl/web/kas/komunikaty"
+FILE_NAME = "messages.txt"
+
+
+def extract_last_num_page(tag):
+    begin = str(tag).index('[') + 1
+    end = str(tag).index(']')
+    try:
+        res = int(str(tag)[begin:end])
+        return res
+    except Exception:
+        print(f'extract_last_num_page() fail: {Exception}')
+        return 1
+
+
+def get_page_nums():
+    page_nums = []
+    response = requests.get(URL)
+    parsed = BeautifulSoup(response.text, 'html.parser')
+    tags = parsed.find_all('span')
+    for tag in tags:
+        tmp = str(tag)
+        if 'Przejdź do ostatniej strony wyników' in tmp:
+            last_page = extract_last_num_page(tag)
+            for page in range(1, last_page+1):
+                page_nums.append(page)
+            return page_nums
+    return [1]
+
+
+def read_old_messages():
+    with open(FILE_NAME, 'r') as file:
+        return file.read().split('\n')
+
+
+def get_current_messages():
+    page_nums = get_page_nums()
+    messages = []
+    for page_num in page_nums:
+        response = requests.get(f'{URL}?page={page_num}')
+        parsed = BeautifulSoup(response.text, 'html.parser')
+        tags = parsed.find_all('div')
+        for tag in tags:
+            tag.find('h2')
+            if "Komunikat nr " in str(tag.string):
+                messages.insert(0, tag.string)
+    return messages
+
+
+def show_new_message_notification(message):
+    toast = Notification(app_id='gov.pl',
+                         title="Nowy komunikat \U00002709",
+                         msg=message,
+                         duration="long",
+                         icon='X:/projects/python/infoshare/govpl.jpg')
+    toast.set_audio(audio.Default, loop=False)
+    toast.add_actions(label="Przejdź do strony", launch="https://www.gov.pl/web/kas/komunikaty?page=1")
+    toast.show()
+
+
+def rewrite_old_messages(msgs):
+    with open(FILE_NAME, 'w') as file:
+        for line in msgs:
+            file.write(f'{line}\n')
+
+
+def main():
+    try:
+        old_messages = read_old_messages()
+        current_messages = get_current_messages()
+        if len(old_messages) == 1:  # is empty
+            rewrite_old_messages(current_messages)
+            return
+        old_messages.pop(-1)  # delete last '\n' while reading the file
+        if old_messages[-1] != current_messages[-1]:
+            show_new_message_notification(current_messages[-1])
+            rewrite_old_messages(current_messages)
+    except Exception as E:
+        print(E)
 
 
 if __name__ == '__main__':
-	print_hi('PyCharm')
+    main()
+
+
