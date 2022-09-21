@@ -64,7 +64,7 @@ def show_new_message_notification(message):
 
 
 def rewrite_old_messages(msgs):
-    with open(FILE_NAME, 'w', encoding="utf-8") as file:
+    with open(FILE_NAME, 'w', encoding="utf-16") as file:
         for line in msgs:
             file.write(f'{line}\n')
 
