@@ -80,12 +80,12 @@ def main():
 				rewrite_old_messages(current_messages)
 				continue
 			old_messages.pop(-1)  # delete last '\n' while reading the file
-			print(old_messages[-1])
-			print(current_messages[-1])
 			if old_messages[-1] != current_messages[-1]:
 				show_new_message_notification(current_messages[-1])
 				rewrite_old_messages(current_messages)
 			time.sleep(TIME_INTERVAL)
+		except KeyboardInterrupt:
+			pass
 		except Exception as E:
 			print(E)
 
