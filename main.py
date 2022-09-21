@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import os
 from winotify import Notification, audio
 
 URL = "https://www.gov.pl/web/kas/komunikaty"
@@ -56,9 +57,9 @@ def show_new_message_notification(message):
                          title="Nowy komunikat \U00002709",
                          msg=message,
                          duration="long",
-                         icon='X:/projects/python/infoshare/govpl.jpg')
+                         icon=f'{os.getcwd()}/govpl.jpg')
     toast.set_audio(audio.Default, loop=False)
-    toast.add_actions(label="Przejdź do strony", launch="https://www.gov.pl/web/kas/komunikaty?page=1")
+    toast.add_actions(label='Przejdź do strony', launch=f'{URL}?page=1')
     toast.show()
 
 
