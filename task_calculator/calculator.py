@@ -39,6 +39,8 @@ class Calculator:
 
 	@classmethod
 	def __div(cls, value_1, value_2):
+		if value_2 == 0:
+			return ZeroDivisionError
 		return value_1 / value_2
 
 	@classmethod
