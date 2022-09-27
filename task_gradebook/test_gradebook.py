@@ -1,10 +1,10 @@
 import unittest
-from diary import Diary
+from gradebook import Gradebook
 from student import Student
 
 
-class TestDiary(unittest.TestCase):
-	diary = Diary()
+class TestGradebook(unittest.TestCase):
+	diary = Gradebook()
 	student_1 = Student("Jackie Chan")
 	student_2 = Student("Bruce Lee")
 	student_3 = Student("Arnold Schwarzenegger")

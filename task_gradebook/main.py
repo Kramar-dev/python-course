@@ -1,9 +1,9 @@
-from diary import Diary
+from gradebook import Gradebook
 from student import Student
 
 
 def main():
-	diary = Diary()
+	diary = Gradebook()
 	student = Student("Pinocchio")
 	diary.add_student(student)
 	diary.add_mark(student, 3)

@@ -1,7 +1,7 @@
 from student import Student
 
 
-class Diary:
+class Gradebook:
 	def add_student(self, student: Student):
 		self.__diary[student.get_name()] = []
 
