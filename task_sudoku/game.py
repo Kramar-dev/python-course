@@ -1,5 +1,7 @@
 import types
 import os
+from logger import Log
+from ansicolors import Colors
 from sudoku import *
 
 defines = types.SimpleNamespace()
@@ -38,7 +40,7 @@ class Game:
 		while True:
 			try:
 				self.__cls()
-				print('\n')
+				Log.v('\n')
 				self.__show_current_table()
 				user_input = int(self.__get_user_input())
 				match user_input:
@@ -61,7 +63,7 @@ class Game:
 		exit(0)
 
 	def __get_user_input(self):
-		user_input = input('\nEnter command:\n (H - help)\n')
+		user_input = input(f'{Colors.BLUE}\nEnter command:\n{Colors.LIGHT_GREEN} (H - help)\n{Colors.END}')
 		user_input = user_input.lower()
 		try:
 			if len(user_input) != 4:
@@ -73,11 +75,11 @@ class Game:
 			as_int_x = int(x)
 			as_int_y = int(y)
 			as_int_v = int(v)
-			if as_int_x not in range(9):
+			if not 0 < as_int_x <= 9:
 				return defines.INVALID
-			if as_int_y not in range(9):
+			if not 0 < as_int_y <= 9:
 				return defines.INVALID
-			if as_int_v not in range(9):
+			if not 0 < as_int_v <= 9:
 				return defines.INVALID
 			return int(f'{x}{y}{v}')
 		except:
@@ -89,7 +91,7 @@ class Game:
 
 	@staticmethod
 	def __show_game_help():
-		print(defines.GAME_HELP_INFO)
+		Log.d(defines.GAME_HELP_INFO)
 
 	def __show_invalid_input(self):
 		self.__show_game_help()

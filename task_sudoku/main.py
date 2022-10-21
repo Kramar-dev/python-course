@@ -1,4 +1,6 @@
+from logger import Log
 from game import *
+
 
 def main():
 	# lst = [['Francis', 'English', 453],
@@ -28,12 +30,8 @@ def main():
 if __name__ == '__main__':
 	main()
 
-
-
-
-
-
-
+	
+	
 
 """
 sudoku create
