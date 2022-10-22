@@ -1,4 +1,3 @@
-from logger import Log
 from game import *
 
 
@@ -23,31 +22,8 @@ def main():
 	# 	      " " * (4-len(str(item[2]))),
 	# 	      '|'
 	# 	)
-	game = Game()
-	game.start_new_game()
+	pass
 
 
 if __name__ == '__main__':
-	main()
-
-	
-	
-
-"""
-sudoku create
-table create
-table fill randomly
-
-
-while True
-	print current table -> clear screen
-	input: enter coordinated and value
-	if value is correct --> if not existsInRow and not existsInCol and not existsInSquare
-		updateTable(coordinates, value)
-		continue
-	else
-		print invalid value
-	
-	keyboard interrupt exception for exit
-
-"""
+	Game().start_new_game()
