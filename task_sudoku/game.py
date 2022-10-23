@@ -13,7 +13,7 @@ defines.GAME_HELP_INFO = """
 +--------------------------------------------------------------------
 |
 | E - exit
-| G - new game
+| N - new game
 | XY V - value for enter in table
 |   where:
 |       X - x-axis coordinate

@@ -1,5 +1,7 @@
 from logger import Log
 import random as rnd
+from ansicolors import Colors
+
 
 class Sudoku:
     def __init__(self, size):
@@ -28,18 +30,37 @@ class Sudoku:
     def fill_table_by_empty(self):
         for x in range(self.size - 1):
             for y in range(self.size - 1):
-                self.table[x + 1].append('[ ]')
+                self.table[x + 1].append('[   ]')
 
     def print_current_table(self):
-        for x in range(self.size):
-            # div, mod = divmod(row, self.size/3)
-            # if mod == 0:
-            # print('-------------------------------------------------------------')
-            Log.v(self.table[x])
+        table_head_row = '     '
+
+        for i in range(1, self.size):
+            table_head_row += f'[{self.table[0][i]}]'
+        Log.w(table_head_row)
+
+        for x in range(1, self.size):
+            current_line = f'[ {Colors.YELLOW}{self.table[x][0]} ]{Colors.END}'
+            for i in range(1, self.size):
+                match i:
+                    case i if 1 <= i <= 3:
+                        current_line += f'{Colors.BLUE}{self.table[x][i]}{Colors.END}'
+                    case i if 4 <= i <= 6:
+                        current_line += f'{Colors.GREEN}{self.table[x][i]}{Colors.END}'
+                    case i if 7 <= i <= 9:
+                        current_line += f'{Colors.CYAN}{self.table[x][i]}{Colors.END}'
+
+
+
+                #div, mod = divmod(x, 3)
+                #Log.i("dupa")
+
+            Log.w(current_line)
+            #Log.v(self.table[x])
 
     def update_table(self, x, y, value):
         if self.can_update(x, y, value):
-            self.table[y][x] = f'[{value}]'
+            self.table[y][x] = f'[ {value} ]'
 
     def exists_in_row(self, x, y, value):
         counter = 0
@@ -47,7 +68,7 @@ class Sudoku:
             if counter == 0:
                 counter += 1
                 continue
-            if element == f'[{value}]':
+            if element == f'[ {value} ]':
                 return True
             counter += 1
         return False
@@ -58,7 +79,7 @@ class Sudoku:
             if counter == 0:
                 counter += 1
                 continue
-            if row[x] == f'[{value}]':
+            if row[x] == f'[ {value} ]':
                 return True
             counter += 1
         return False
@@ -114,5 +135,5 @@ class Sudoku:
         pass
 
     def fill_table(self):
-        for i in range(30):
+        for i in range(37):
             self.fill_next_random_cell()
