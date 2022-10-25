@@ -1,6 +1,5 @@
 import types
 import os
-from ansicolors import Colors
 from sudoku import *
 
 
@@ -10,17 +9,17 @@ defines.NEW_GAME = 101
 defines.INVALID = -1
 defines.EXIT = 0
 defines.GAME_HELP_INFO = """
-+--------------------------------------------------------------------
-|
-| E - exit
-| N - new game
-| XY V - value for enter in table
-|   where:
-|       X - x-axis coordinate
-|       Y - y-axis coordinate
-|       V - value to enter in table (1-9)
-|
-+--------------------------------------------------------------------
++---------------------------------------+
+|                                       |
+| E - exit                              |
+| N - new game                          |
+| XY V - enter new value to table       |
+|   where:                              |
+|       X - x-axis coordinate           |
+|       Y - y-axis coordinate           |
+|       V - value (1-9)                 |
+|                                       |
++---------------------------------------+
 """
 
 
@@ -28,7 +27,7 @@ class Game:
 	__sudoku: Sudoku
 
 	def __cls(self):
-		os.system('cls')  # print("\033[H\033[J", end="")
+		os.system('cls')
 
 	def start_new_game(self):
 		self.__create_table()

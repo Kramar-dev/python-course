@@ -41,22 +41,16 @@ class Sudoku:
 
         for x in range(1, self.size):
             current_line = f'[ {Colors.YELLOW}{self.table[x][0]} ]{Colors.END}'
-            for i in range(1, self.size):
-                match i:
-                    case i if 1 <= i <= 3:
-                        current_line += f'{Colors.BLUE}{self.table[x][i]}{Colors.END}'
-                    case i if 4 <= i <= 6:
-                        current_line += f'{Colors.GREEN}{self.table[x][i]}{Colors.END}'
-                    case i if 7 <= i <= 9:
-                        current_line += f'{Colors.CYAN}{self.table[x][i]}{Colors.END}'
-
-
-
-                #div, mod = divmod(x, 3)
-                #Log.i("dupa")
-
+            for y in range(1, self.size):
+                sq_number_x = self.get_square_number(x)
+                sq_number_y = self.get_square_number(y)
+                div_x, mod_x = divmod(sq_number_x, 2)
+                div_y, mod_y = divmod(sq_number_y, 2)
+                if mod_x == mod_y:
+                    current_line += f'{Colors.LIGHT_CYAN}{self.table[x][y]}{Colors.END}'
+                else:
+                    current_line += f'{Colors.LIGHT_GREEN}{self.table[x][y]}{Colors.END}'
             Log.w(current_line)
-            #Log.v(self.table[x])
 
     def update_table(self, x, y, value):
         if self.can_update(x, y, value):
@@ -122,7 +116,7 @@ class Sudoku:
         return True
         
     def cell_busy(self, element):
-        for number in range(1, 9):
+        for number in range(1, 10):
             if str(number) in element:
                 return True
         return False
