@@ -9,17 +9,15 @@ defines.NEW_GAME = 101
 defines.INVALID = -1
 defines.EXIT = 0
 defines.GAME_HELP_INFO = """
-+---------------------------------------+
-|                                       |
-| E - exit                              |
-| N - new game                          |
-| XY V - enter new value to table       |
-|   where:                              |
-|       X - x-axis coordinate           |
-|       Y - y-axis coordinate           |
-|       V - value (1-9)                 |
-|                                       |
-+---------------------------------------+
++-----------------------------------+
+| E - exit                          |
+| N - new game                      |
+| XY V - enter new value to table   |
+|   where:                          |
+|       X - x-axis coordinate       |
+|       Y - y-axis coordinate       |
+|       V - value (1-9)             |
++-----------------------------------+
 """
 
 
@@ -33,7 +31,6 @@ class Game:
 		self.__create_table()
 		while True:
 			try:
-				self.__cls()
 				Log.v('\n')
 				self.__show_current_table()
 				user_input = int(self.__get_user_input())
@@ -43,8 +40,8 @@ class Game:
 					case defines.NEW_GAME:
 						self.start_new_game()
 					case defines.INVALID:
-						Log.e("Command incorrect")
 						Game.__show_game_help()
+						Log.e("Command incorrect")
 						continue
 					case defines.HELP:
 						Game.__show_game_help()
@@ -58,7 +55,7 @@ class Game:
 		exit(0)
 
 	def __get_user_input(self):
-		user_input = input(f'{Colors.BLUE}\nEnter command:\n{Colors.LIGHT_GREEN} (H - help)\n{Colors.END}')
+		user_input = input(f'{Colors.BLUE}\nEnter command:{Colors.LIGHT_GREEN} (H - help)\n{Colors.END}')
 		user_input = user_input.lower()
 		if len(user_input) == 1:
 			match user_input:
