@@ -1,3 +1,9 @@
+import sys
+name = str(__file__)
+index = name.index('\\task_sudoku\sudoku.py') + 1
+sys.path.insert(1, name[:index])
+
+
 import types
 from logger import Log
 import random as rnd
