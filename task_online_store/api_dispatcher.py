@@ -9,7 +9,7 @@ class Api:
     def on_message(self, message: str) -> bool:
         match message:
             case '/exit':
-                self.logout_procedure()
+                # self.logout_procedure()
                 return True
 
             case '/login':
@@ -68,7 +68,7 @@ class Api:
                 self.show_user_info()
 
             case '/change-user-type':
-                # TODO self.change_user_type()
+                self.set_user_type_to_admin()
                 pass
 
             case _:
@@ -171,6 +171,14 @@ class Api:
         login = input()
         self.shop.show_user_info(login)
 
+    def set_user_type_to_admin(self):
+        if not self.shop.is_admin():
+            Shop.show_not_admin_error()
+            return
+        Log.d('Enter user login:')
+        login = input()
+        self.shop.set_user_type_to_admin(login)
+        
     @staticmethod
     def print_help():
         Log.i('usage:\n'
@@ -192,7 +200,8 @@ class Api:
               '/add-user\n'
               '/remove-user\n'
               '/change-user-password\n'
-              '/show-user-info')
+              '/show-user-info\n'
+              '/change-user-type')
 
     @staticmethod
     def get_user_input_int(dialog: str) -> int:

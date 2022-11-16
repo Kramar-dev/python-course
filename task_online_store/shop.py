@@ -47,6 +47,7 @@ class Shop:
         exists = self.users[self.current_user].basket.get(item_id)
         if exists is None:
             self.users[self.current_user].basket[item_id] = ShoppingBasketItem(1, self.items[item_id].price)
+            self.users[self.current_user].total_price += self.items[item_id].price
             return
         self.users[self.current_user].basket[item_id].count += 1
         self.users[self.current_user].total_price += self.items[item_id].price
@@ -72,8 +73,12 @@ class Shop:
             Shop.show_not_auth_error()
             return
         basket = self.users[self.current_user].basket
+        if len(basket) == 0:
+            Log.w('Basket is empty')
+            return
         for item_id, item in basket.items():
             Log.v(f'{self.items[item_id].name}  [{item.count}]  {item.price}')
+        Log.v(f'Total: {self.users[self.current_user].total_price}')
 
     def finalize_order(self):
         if not self.authorized():
@@ -225,9 +230,19 @@ class Shop:
             return
         Log.i(user)
 
+    def set_user_type_to_admin(self, user_id: str):
+        if not self.authorized():
+            Shop.show_not_auth_error()
+            return
+        user = self.users.get(user_id)
+        if user is None:
+            Log.d('Sorry, this user does not exists in database')
+            return
+        self.users[user_id].is_admin = True
+        
     def authorized(self) -> bool:
         if self.current_user == '':
-            self.show_not_auth_error()
+            #self.show_not_auth_error()
             return False
         return True
 
