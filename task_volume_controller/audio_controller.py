@@ -16,9 +16,7 @@ class AudioController:
 			if session.Process and session.Process.name() == "vlc.exe":
 				print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume())
 				volume.SetMasterVolume(0.6, None)
-	
-	
-	
+
 	def mute(self):
 		self.__volume.SetMute(1, None)
 	
@@ -28,10 +26,5 @@ class AudioController:
 	def get_volume(self):
 		return self.__volume.GetMasterVolumeLevel()
 	
-	"""
-	1 - x
-	-65.25 - 100
-
-	"""
 	def set_volume(self, level: float):
 		self.__volume.SetMasterVolumeLevelScalar(level, None)
