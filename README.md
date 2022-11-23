@@ -46,7 +46,7 @@ Nano online store without any database with mini **api**: <br>
 ```/clear-basket```<br>
 ```/remove-item-from-basket```<br>
 ```/finalize-order```<br>
-<br>**Admin panel:** <br>
+<br>***Admin panel:*** <br>
 ```/change-password```<br>
 ```/add-item-to-store```<br>
 ```/remove-item-from-store```<br>
@@ -58,7 +58,7 @@ Nano online store without any database with mini **api**: <br>
 ```/show-user-info```<br>
 ```/change-user-type```
 <br><br>
-- #### Volume controller for Windows 10
+#### Volume controller for Windows 10
 Entry point ```main.py``` <br>
 **Usage**: <br>
 ```set_volume(0.0..1.0)``` <br>
