@@ -1,0 +1,2 @@
+class NumberReader:
+    pass

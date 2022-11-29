@@ -1,0 +1,2 @@
+class NumberWriter:
+    pass
