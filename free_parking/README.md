@@ -8,7 +8,7 @@ If time elapsed -> we should leave the parking bill under wiper =) <br>
 <br>
 #### Stack
 * communication - http
-* database - txt or sqlite
+* database - txt file
 * regex - for car's number
 
 
