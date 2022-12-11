@@ -42,7 +42,7 @@ class Users:
 
     @staticmethod
     def password_correct(password: str) -> bool:
-        # TODO check special condition for entered password
+        # TODO password regex
         if len(password) < 8:
             return False
         return True

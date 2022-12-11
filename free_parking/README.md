@@ -5,10 +5,5 @@ Also http-server is running and when get some car's number from http-client (wri
 Second http-client (reader) is number's checker. It will get from database if car's number is already saved in database and <br>
 how long the car stay on parking. <br>
 If time elapsed -> we should leave the parking bill under wiper =) <br>
-<br>
-#### Stack
-* communication - http
-* database - txt file
-* regex - for car's number
 
 
