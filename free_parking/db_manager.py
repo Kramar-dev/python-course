@@ -1,7 +1,7 @@
 from logger import Log
 from time_utils import TimeUtils
-from defines import status
-from defines import text
+from defines import Status
+from defines import Text
 
 class DbManager:
 
@@ -9,18 +9,18 @@ class DbManager:
         self.db_name = db_name
 
     def open_db(self):
-        Log.i(text.DB_OPEN)
+        Log.i(Text.DB_OPEN)
 
     def close(self):
-        Log.i(text.DB_CLOSED)
+        Log.i(Text.DB_CLOSED)
 
-    def get_car_status(self, number: str) -> (status, str):
+    def get_car_status(self, number: str) -> (Status, str):
         if not self.is_exists(number):
-            return status.NOT_EXISTS, ''
+            return Status.NOT_EXISTS, ''
         saved_time = self.get_time_by_number_str(number)
         if TimeUtils.is_time_elapsed(saved_time):
-            return status.TIME_ELAPSED, ''
-        return status.OK, TimeUtils.time_left(saved_time)
+            return Status.TIME_ELAPSED, ''
+        return Status.OK, TimeUtils.time_left(saved_time)
 
     def save_if_not_exists(self, number: str) -> bool:
         if self.is_exists(number):

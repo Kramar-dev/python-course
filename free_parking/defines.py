@@ -1,18 +1,19 @@
-import types
+from enum import Enum
 
 
-status = types.SimpleNamespace()
-status.OK = 0
-status.TIME_ELAPSED = 1
-status.NOT_EXISTS = 2
+class Status(Enum):
+    OK = 0
+    TIME_ELAPSED = 1
+    NOT_EXISTS = 2
 
-text = types.SimpleNamespace()
-text.OK = 'OK'
-text.DB_OPEN = 'Database open successfully'
-text.DB_CLOSED = 'Database closed successfully'
-text.NOT_EXISTS = 'Number is not exists in database'
-text.TIME_ELAPSED = 'Parking time is elapsed!'
-text.NOT_IMPLEMENTED = 'Unsupported path'
-text.SAVE_TO_DB = 'Saved successfully'
-text.NUMBER_ALREADY_EXISTS = 'Already exists in database'
-text.HTTP_SERVER_RUNNING = 'Http server is running...'
+
+class Text:
+    OK = 'OK'
+    DB_OPEN = 'Database open successfully'
+    DB_CLOSED = 'Database closed successfully'
+    NOT_EXISTS = 'Number is not exists in database'
+    TIME_ELAPSED = 'Parking time is elapsed!'
+    NOT_IMPLEMENTED = 'Unsupported path'
+    SAVE_TO_DB = 'Saved successfully'
+    NUMBER_ALREADY_EXISTS = 'Already exists in database'
+    HTTP_SERVER_RUNNING = 'Http server is running...'

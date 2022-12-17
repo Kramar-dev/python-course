@@ -1,15 +1,15 @@
 import requests
-from defines import text
+from defines import Text
 from free_parking.db_manager import db
 from logger import Log
 
 
-class TestNumberChecker():
+class TestNumberChecker:
 
     def test_read_before(self):
         db.drop_db()
         reader = requests.get(url='http://127.0.0.1:12345/read', data='GD 123 GKA')
-        if reader.text == text.NOT_EXISTS:
+        if reader.text == Text.NOT_EXISTS:
             Log.i('Test 1 passed')
             db.drop_db()
             return
@@ -17,7 +17,7 @@ class TestNumberChecker():
 
     def test_write(self):
         writer = requests.put(url='http://127.0.0.1:12345/write', data='GD 123 GKA')
-        if writer.text == text.SAVE_TO_DB:
+        if writer.text == Text.SAVE_TO_DB:
             Log.i('Test 2 passed')
             db.drop_db()
             return
